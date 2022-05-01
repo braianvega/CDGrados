@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CDGrados</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div>
+        <container>
+            <label>Digite los grados: </label>
+            <input id="Grados" classname="Input" />
+            <button id="Recibe" classname="Button">Aceptar</button>
+        </container>
+    </div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBrT4PoK2yqvpy2yb80yjwTJK-jJNGPQZo",
+        authDomain: "comunicaciondos-864b9.firebaseapp.com",
+        projectId: "comunicaciondos-864b9",
+        storageBucket: "comunicaciondos-864b9.appspot.com",
+        messagingSenderId: "722659075039",
+        appId: "1:722659075039:web:85f855fa0d7ae1070a5a6a",
+        measurementId: "G-092SV5NK2P",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+      import {
+        getDatabase,
+        get,
+        ref,
+        set,
+        child,
+        update,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+
+      var Grados = document.getElementById("Grados");
+      var BtnRecibe = document.getElementById("Recibe");
+      const db = getDatabase();
+
+      function UpdateData() {
+        update(ref(db, "Grados/"), {
+          Valor: Grados.value,
+        })
+          .then(() => {
+            alert("Con exito");
+          })
+          .catch(() => {
+            alert("Sin exito");
+          });
+      }
+
+      BtnRecibe.addEventListener("click", UpdateData);
+    </script>
+    
+    <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    -->
+  </body>
+</html>
